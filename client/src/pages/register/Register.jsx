@@ -8,6 +8,7 @@ export default function Register() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(false);
+  const [role, setRole] = useState('seller')
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -18,9 +19,11 @@ export default function Register() {
         username,
         email,
         password,
+        role
       });
       res.data && window.location.replace("/login");
     } catch (err) {
+      console.log(err)
       setError(true)
     }
   };
@@ -43,6 +46,20 @@ export default function Register() {
           placeholder="Enter your email"
           onChange={(e) => setEmail(e.target.value)}
         />
+
+
+        <label>
+          What is your Role:
+          <select value={role} onChange={(e) => setRole(e.target.value)}>
+            <option value="farmer">Farmer</option>
+            <option  value="seller">Seller</option>
+            
+          </select>
+        </label>
+       
+
+
+
         <label>Password</label>
         <input
           className="registerInput"
