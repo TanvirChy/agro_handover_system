@@ -19,6 +19,7 @@ object-fit: cover;
 .writeFormGroup{
     margin-left: 150px;
     display: flex;
+    flex-direction: column;
     align-items: center;
 }
 
@@ -48,7 +49,7 @@ object-fit: cover;
 
 .writeText{
     font-size: 20px;
-    height: 100vh;
+    height: 20vh;
 }
 
 .writeSubmit{

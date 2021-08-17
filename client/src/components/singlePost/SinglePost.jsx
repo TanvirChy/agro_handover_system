@@ -12,6 +12,9 @@ export default function SinglePost() {
   const { user } = useContext(Context);
   const [title, setTitle] = useState("");
   const [desc, setDesc] = useState("");
+  const [quantity, setQuantity] = useState("");
+  const [price, setPrice] = useState("");
+  const [place, setPlace] = useState("");
   const [updateMode, setUpdateMode] = useState(false);
 
   useEffect(() => {
@@ -20,6 +23,9 @@ export default function SinglePost() {
       setPost(res.data);
       setTitle(res.data.title);
       setDesc(res.data.desc);
+      setQuantity(res.data.quantity);
+      setPrice(res.data.price);
+      setPlace(res.data.place);
     };
     getPost();
   }, [path]);
@@ -36,7 +42,7 @@ export default function SinglePost() {
   const handleUpdate = async () => {
     try {
       await axios.put(`/posts/${post._id}`, {
-         username: user.username, title, desc 
+         username: user.username, title, desc , quantity,price,place
       });
       setUpdateMode(false)
     } catch (err) {}
@@ -94,6 +100,36 @@ export default function SinglePost() {
           />
         ) : (
           <p className="singlePostDesc">{desc}</p>
+        )}
+        { updateMode ? (
+          <input 
+          type="text"
+          value={quantity}
+            className="singlePostTitleInput"
+            onChange={(e) => setQuantity(e.target.value)}
+          />
+        ):(
+          <p className="singlePostDesc">{quantity}</p>
+        )}
+        { updateMode ? (
+          <input 
+          type="text"
+          value={price}
+            className="singlePostTitleInput"
+            onChange={(e) => setPrice(e.target.value)}
+          />
+        ):(
+          <p className="singlePostDesc">{price}</p>
+        )}
+        { updateMode ? (
+          <input 
+          type="text"
+          value={place}
+            className="singlePostTitleInput"
+            onChange={(e) => setPlace(e.target.value)}
+          />
+        ):(
+          <p className="singlePostDesc">{place}</p>
         )}
         {updateMode && (
           <button className="singlePostButton" onClick={handleUpdate}>
